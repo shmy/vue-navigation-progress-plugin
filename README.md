@@ -36,7 +36,7 @@ const router = new VueRouter({
 });
 Vue.use(vueNavigationProgressPlugin, router);
 new Vue({
-  el: "#app',
+  el: "#app",
   router,
   render: h => h(App)
 });
@@ -56,5 +56,5 @@ new Vue({
 ```
 
 
-  [1]: ./images/p1.gif "p1.gif"
-  [2]: ./images/p2.gif "p2.gif"
+  [1]: ./img/p1.gif "p1.gif"
+  [2]: ./img/p2.gif "p2.gif"
