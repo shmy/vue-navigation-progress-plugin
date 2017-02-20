@@ -1,0 +1,41 @@
+{
+  "name": "vue-navigation-progress-plugin",
+  "version": "0.0.1",
+  "main": "dist/vue-navigation-progress-plugin.js",
+  "description": "vue-router plugin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shmy/vue-navigation-progress-plugin"
+  },
+  "keywords": [
+    "vue",
+    "vue-component",
+    "vue-plugin",
+    "vue-progress"
+  ],
+  "author": "shmy",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack -w"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.7.3",
+    "babel-core": "^6.23.1",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "css-loader": "^0.26.1",
+    "eslint": "^3.15.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.2",
+    "eslint-plugin-standard": "^2.0.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^2.5.0",
+    "vue": "^2.1.10",
+    "vue-loader": "^11.0.0",
+    "vue-style-loader": "^2.0.0",
+    "vue-template-compiler": "^2.1.10",
+    "webpack": "^2.2.1"
+  }
+}
