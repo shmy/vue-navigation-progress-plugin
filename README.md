@@ -21,8 +21,8 @@ $ yarn add vue-navigation-progress-plugin
 ```javascript
 // main.js
 import Vue from "vue";
-import VueRouter from "vue-router';
-import App from "./App';
+import VueRouter from "vue-router";
+import App from "./App";
 import vueNavigationProgressPlugin from "vue-navigation-progress-plugin";
 Vue.use(VueRouter);
 const router = new VueRouter({
@@ -44,6 +44,7 @@ new Vue({
 ```
 
 ```html
+ <!-- like App.vue -->
  <template>
   <div id="app">
    <!-- 进度条组件 -->
