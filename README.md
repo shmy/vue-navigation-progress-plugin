@@ -4,7 +4,8 @@
 [![license](https://img.shields.io/github/license/shmy/vue-navigation-progress-plugin.svg?style=flat-square)](https://github.com/shmy/vue-navigation-progress-plugin/blob/master/LICENSE.md)
 [![GitHub stars](https://img.shields.io/github/stars/shmy/vue-navigation-progress-plugin.svg?style=social&label=Star)](https://github.com/shmy/vue-navigation-progress-plugin)  
 ![enter description here][1]  
-![enter description here][2]
+![enter description here][2]  
+
 ### **Important**
 - Webpakc2 required  
 

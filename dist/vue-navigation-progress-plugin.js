@@ -684,7 +684,7 @@ var flatMapComponents = function flatMapComponents(route, fn) {
     });
   }));
 };
-var loadAsyncComponents = async function loadAsyncComponents(to, from, next, Vue, router) {
+var loadAsyncComponents = function loadAsyncComponents(to, from, next, Vue, router) {
   var $progress = router.app && router.app.$root.$progress;
   var resolveComponents = flatMapComponents(to, function (Component, match, key) {
     if (typeof Component === "function" && !Component.options) {
@@ -710,15 +710,14 @@ var loadAsyncComponents = async function loadAsyncComponents(to, from, next, Vue
   if (!(fromPath === toPath)) {
     $progress && $progress.start();
   }
-  try {
-    await Promise.all(resolveComponents);
+  Promise.all(resolveComponents).then(function () {
     $progress && $progress.finish();
     next();
-  } catch (error) {
+  }, function () {
     $progress && $progress.fail();
     $progress && $progress.finish();
     next(false);
-  }
+  });
 };
 
 /* harmony default export */ __webpack_exports__["default"] = {

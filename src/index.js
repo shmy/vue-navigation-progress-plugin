@@ -7,7 +7,7 @@ const flatMapComponents = (route, fn) => {
     });
   }));
 };
-const loadAsyncComponents = async (to, from, next, Vue, router) => {
+const loadAsyncComponents = (to, from, next, Vue, router) => {
   const $progress = router.app && router.app.$root.$progress;
   const resolveComponents = flatMapComponents(to, (Component, match, key) => {
     if (typeof Component === "function" && !Component.options) {
@@ -33,15 +33,14 @@ const loadAsyncComponents = async (to, from, next, Vue, router) => {
   if (!(fromPath === toPath)) {
     $progress && $progress.start();
   }
-  try {
-    await Promise.all(resolveComponents);
+  Promise.all(resolveComponents).then(() => {
     $progress && $progress.finish();
     next();
-  } catch (error) {
+  }, () => {
     $progress && $progress.fail();
     $progress && $progress.finish();
     next(false);
-  }
+  });
 };
 
 export default {
