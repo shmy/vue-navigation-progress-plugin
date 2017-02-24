@@ -1,15 +1,20 @@
 <template>
-  <div class="router-progress" :style="{
-    'width': percent+'%',
-    'background-color': canSuccess? color : failedColor,
-    'box-shadow': '0 0 10px ' + shadowColor,
-    'opacity': show ? 1 : 0
-    }"></div>
+  <div :style="[cssObj, style]"></div>
 </template>
 
 <script>
   export default {
     name: "router-progress",
+    computed: {
+      style () {
+        return {
+          width: this.percent + "%",
+          backgroundColor: this.canSuccess ? this.color : this.failedColor,
+          boxShadow: "0 0 10px " + this.shadowColor,
+          opacity: this.show ? 1 : 0
+        };
+      }
+    },
     created () {
       !this.$root.$progress && (this.$root.$progress = this);
     },
@@ -32,11 +37,20 @@
         percent: 0,
         show: false,
         canSuccess: true,
-        duration: 5000
+        duration: 5000,
+        cssObj: {
+          position: "fixed",
+          top: "0px",
+          left: "0px",
+          right: "0px",
+          height: "2px",
+          transition: "width .2s, opacity .2s",
+          zIndex: "999998"
+        }
       };
     },
     methods: {
-      start () {
+      start() {
         this.show = true;
         this.canSuccess = true;
         if (this._timer) {
@@ -50,35 +64,29 @@
             this.pause();
           }
         }, 100);
-        return this;
       },
-      set (num) {
+      set(num) {
         this.show = true;
         this.canSuccess = true;
         this.percent = Math.floor(num);
-        return this;
       },
-      get () {
+      get() {
         return Math.floor(this.percent);
       },
-      increase (num) {
+      increase(num) {
         this.percent = this.percent + Math.floor(num);
-        return this;
       },
-      decrease (num) {
+      decrease(num) {
         this.percent = this.percent - Math.floor(num);
-        return this;
       },
-      finish () {
+      finish() {
         this.percent = 100;
         this.hide();
-        return this;
       },
-      pause () {
+      pause() {
         clearInterval(this._timer);
-        return this;
       },
-      hide () {
+      hide() {
         clearInterval(this._timer);
         this._timer = null;
         setTimeout(() => {
@@ -89,23 +97,11 @@
             }, 200);
           });
         }, 500);
-        return this;
       },
-      fail () {
+      fail() {
         this.canSuccess = false;
-        return this;
       }
     }
   };
-</script>
 
-<style scoped lang="stylus">
-  .router-progress 
-    position: fixed
-    top: 0px
-    left: 0px
-    right: 0px
-    height: 2px
-    transition: width .2s, opacity .2s
-    z-index: 999998
-</style>
+</script>

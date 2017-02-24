@@ -7,9 +7,68 @@
 ![enter description here][2]  
 
 ### **Important**
-- Webpakc2 required  
+- 如果使用代码分割,异步组件加载需使用 `Webpack2` 的`System.import()`
 
 ### **Installation**  
+
++ via **CDN**  
+``` html
+  <script src="https://unpkg.com/vue-navigation-progress-plugin/dist/vue-navigation-progress-plugin.min.js"></script>
+```  
+### simple example  
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script src="https://unpkg.com/vue-navigation-progress-plugin/dist/vue-navigation-progress-plugin.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 放置进度条组件  -->
+    <router-progress></router-progress>
+    <router-view></router-view>
+  </div>
+  <template id="index">
+    <div>
+      <h1>this is index page</h1>
+      <router-link to="/list">go to list</router-link>
+    </div>
+  </template>
+  <template id="list">
+    <div>
+      <h1>this is list page</h1>
+      <router-link to="/">go to index</router-link>
+    </div>
+  </template>
+  <script>
+    Vue.use(VueRouter);
+    var router = new VueRouter({
+      routes: [{
+        path: "/",
+        component: { template: "#index" },
+        meta: { title: "首页" }
+      }, {
+        path: "/list",
+        component: { template: "#list" },
+        meta: { title: "列表页" }
+      }]
+    });
+    Vue.use(vueNavigationProgressPlugin, router);
+    new Vue({
+      el: "#app",
+      router
+    })
+  </script>
+</body>
+
+</html>
+````  
 
 + via **NPM**  
 ```bash
@@ -48,7 +107,7 @@ new Vue({
  <!-- like App.vue -->
  <template>
   <div id="app">
-   <!-- 进度条组件 -->
+   <!-- 放置进度条组件 -->
     <router-progress/>
     <router-view/>
   </div>
