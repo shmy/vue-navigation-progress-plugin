@@ -1,5 +1,5 @@
 <template>
-  <div :style="[cssObj, style]"></div>
+  <div data-v-123456 :style="style"></div>
 </template>
 
 <script>
@@ -8,7 +8,7 @@
     computed: {
       style () {
         return {
-          width: this.percent + "%",
+          transform: `translate3d(${this.percent - 100}%, 0, 0)`,
           backgroundColor: this.canSuccess ? this.color : this.failedColor,
           boxShadow: "0 0 10px " + this.shadowColor,
           opacity: this.show ? 1 : 0
@@ -19,6 +19,10 @@
       !this.$root.$progress && (this.$root.$progress = this);
     },
     props: {
+      duration: {
+        type: Number,
+        default: 3000
+      },
       color: {
         type: String,
         default: "#77b6ff"
@@ -36,17 +40,7 @@
       return {
         percent: 0,
         show: false,
-        canSuccess: true,
-        duration: 5000,
-        cssObj: {
-          position: "fixed",
-          top: "0px",
-          left: "0px",
-          right: "0px",
-          height: "2px",
-          transition: "width .2s, opacity .2s",
-          zIndex: "999998"
-        }
+        canSuccess: true
       };
     },
     methods: {

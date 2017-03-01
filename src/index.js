@@ -45,6 +45,10 @@ const loadAsyncComponents = (to, from, next, Vue, router) => {
 
 export default {
   install (Vue, router) {
+    const style = document.createElement("style");
+    style.type = "text/css";
+    style.textContent = `\ndiv[data-v-123456]{position:fixed;top:0;left:0;right:0;height:2px;width:100%;transition:transform 0.3s ease-out,opacity 0.3s ease-out;z-index:9999}\n`;
+    document.head.appendChild(style);
     Vue.component(routerProgress.name, routerProgress);
     router.beforeEach((to, from, next) => loadAsyncComponents(to, from, next, Vue, router));
   }

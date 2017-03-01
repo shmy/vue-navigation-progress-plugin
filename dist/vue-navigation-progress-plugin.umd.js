@@ -5,13 +5,13 @@
 }(this, (function () { 'use strict';
 
 var routerProgress = {
-render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{style:([_vm.cssObj, _vm.style])})},
+render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{style:(_vm.style),attrs:{"data-v-123456":""}})},
 staticRenderFns: [],
     name: "router-progress",
     computed: {
       style: function style () {
         return {
-          width: this.percent + "%",
+          transform: ("translate3d(" + (this.percent - 100) + "%, 0, 0)"),
           backgroundColor: this.canSuccess ? this.color : this.failedColor,
           boxShadow: "0 0 10px " + this.shadowColor,
           opacity: this.show ? 1 : 0
@@ -22,6 +22,10 @@ staticRenderFns: [],
       !this.$root.$progress && (this.$root.$progress = this);
     },
     props: {
+      duration: {
+        type: Number,
+        default: 3000
+      },
       color: {
         type: String,
         default: "#77b6ff"
@@ -39,17 +43,7 @@ staticRenderFns: [],
       return {
         percent: 0,
         show: false,
-        canSuccess: true,
-        duration: 5000,
-        cssObj: {
-          position: "fixed",
-          top: "0px",
-          left: "0px",
-          right: "0px",
-          height: "2px",
-          transition: "width .2s, opacity .2s",
-          zIndex: "999998"
-        }
+        canSuccess: true
       };
     },
     methods: {
@@ -157,6 +151,10 @@ var loadAsyncComponents = function (to, from, next, Vue, router) {
 
 var index = {
   install: function install (Vue, router) {
+    var style = document.createElement("style");
+    style.type = "text/css";
+    style.textContent = "\ndiv[data-v-123456]{position:fixed;top:0;left:0;right:0;height:2px;width:100%;transition:transform 0.3s ease-out,opacity 0.3s ease-out;z-index:9999}\n";
+    document.head.appendChild(style);
     Vue.component(routerProgress.name, routerProgress);
     router.beforeEach(function (to, from, next) { return loadAsyncComponents(to, from, next, Vue, router); });
   }
