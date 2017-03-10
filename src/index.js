@@ -8,7 +8,7 @@ const flatMapComponents = (route, fn) => {
   }));
 };
 const loadAsyncComponents = (to, from, next, Vue, router) => {
-  const $progress = router.app && router.app.$root.$progress;
+  let $progress = router.app && router.app.$root.$progress;
   const resolveComponents = flatMapComponents(to, (Component, match, key) => {
     if (typeof Component === "function" && !Component.options) {
       return new Promise((resolve, reject) => {
@@ -47,7 +47,7 @@ export default {
   install (Vue, router) {
     const style = document.createElement("style");
     style.type = "text/css";
-    style.textContent = `\ndiv[data-v-123456]{position:fixed;top:0;left:0;right:0;height:2px;width:100%;transition:transform 0.3s ease-out,opacity 0.3s ease-out;z-index:9999}\n`;
+    style.textContent = "__CSS_CONTENT__";
     document.head.appendChild(style);
     Vue.component(routerProgress.name, routerProgress);
     router.beforeEach((to, from, next) => loadAsyncComponents(to, from, next, Vue, router));

@@ -1,7 +1,7 @@
 'use strict';
 
 var routerProgress = {
-render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{style:(_vm.style),attrs:{"data-v-123456":""}})},
+render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"router-progress",style:(_vm.style)})},
 staticRenderFns: [],
     name: "router-progress",
     computed: {
@@ -9,7 +9,6 @@ staticRenderFns: [],
         return {
           transform: ("translate3d(" + (this.percent - 100) + "%, 0, 0)"),
           backgroundColor: this.canSuccess ? this.color : this.failedColor,
-          boxShadow: "0 0 10px " + this.shadowColor,
           opacity: this.show ? 1 : 0
         };
       }
@@ -26,10 +25,6 @@ staticRenderFns: [],
         type: String,
         default: "#77b6ff"
       },
-      shadowColor: {
-        type: String,
-        default: "rgba(119,182,255,0.7)"
-      },
       failedColor: {
         type: String,
         default: "red"
@@ -43,7 +38,7 @@ staticRenderFns: [],
       };
     },
     methods: {
-      start: function start() {
+      start: function start () {
         var this$1 = this;
 
         this.show = true;
@@ -60,28 +55,28 @@ staticRenderFns: [],
           }
         }, 100);
       },
-      set: function set(num) {
+      set: function set (num) {
         this.show = true;
         this.canSuccess = true;
         this.percent = Math.floor(num);
       },
-      get: function get() {
+      get: function get () {
         return Math.floor(this.percent);
       },
-      increase: function increase(num) {
+      increase: function increase (num) {
         this.percent = this.percent + Math.floor(num);
       },
-      decrease: function decrease(num) {
+      decrease: function decrease (num) {
         this.percent = this.percent - Math.floor(num);
       },
-      finish: function finish() {
+      finish: function finish () {
         this.percent = 100;
         this.hide();
       },
-      pause: function pause() {
+      pause: function pause () {
         clearInterval(this._timer);
       },
-      hide: function hide() {
+      hide: function hide () {
         var this$1 = this;
 
         clearInterval(this._timer);
@@ -95,7 +90,7 @@ staticRenderFns: [],
           });
         }, 500);
       },
-      fail: function fail() {
+      fail: function fail () {
         this.canSuccess = false;
       }
     }
@@ -149,7 +144,7 @@ var index = {
   install: function install (Vue, router) {
     var style = document.createElement("style");
     style.type = "text/css";
-    style.textContent = "\ndiv[data-v-123456]{position:fixed;top:0;left:0;right:0;height:2px;width:100%;transition:transform 0.3s ease-out,opacity 0.3s ease-out;z-index:9999}\n";
+    style.textContent = ".router-progress{position:fixed;top:0;left:0;right:0;height:2px;width:100%;transition:transform .3s ease-out,opacity .3s ease-out;box-shadow:rgba(119,182,255,.7);z-index:9999}";
     document.head.appendChild(style);
     Vue.component(routerProgress.name, routerProgress);
     router.beforeEach(function (to, from, next) { return loadAsyncComponents(to, from, next, Vue, router); });
