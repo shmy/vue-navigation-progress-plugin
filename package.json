@@ -1,6 +1,6 @@
 {
   "name": "vue-navigation-progress-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/vue-navigation-progress-plugin.cjs.js",
   "description": "vue-router plugin",
   "repository": {
